@@ -1,0 +1,38 @@
+.product {
+    overflow: hidden;
+    box-shadow: 0px 2px 8px 0px var(--clr-gray-light);
+    background-color: beige;
+    text-align: center;
+    border-radius: 1rem;
+    position: relative;
+    margin: 0.5rem;
+}
+
+.product_info li {
+    display: inline;
+    list-style: none;
+}
+
+.product_info {
+    font-size: 12px;
+}
+
+.product_footer {
+    margin: 10px 0;
+}
+
+.product_footer button {
+    height: 28px;
+    font-size: 11px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.bottom-8 {
+    position: relative;
+    bottom: 8px;
+}
+
+.padding-right-8 {
+    padding-right: 8px;
+}

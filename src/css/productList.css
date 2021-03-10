@@ -1,0 +1,80 @@
+.products h1 {
+    text-align: center;
+}
+
+.subheading {
+    text-align: center;
+}
+
+.results dd {
+    font-size: smaller;
+}
+
+.results button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: white;
+    color: #000000;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.results button:hover,
+button:focus {
+    background: gray;
+}
+
+.pagination {
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    display: inline;
+}
+
+.pagination a {
+    color: #000000;
+    float: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    
+    }
+.pagination a:hover{
+    text-decoration: underline;
+}
+
+.pagination li {
+    display: inline;
+    
+}
+
+.filters{
+    font-size: 14px;
+    text-align: center; 
+    margin: 20px;
+    
+}
+.filters fieldset{
+    text-align: center;
+    width: 100%;
+    position:relative;
+    font-size: 11px;
+    padding: 5px;
+    display: flex;
+  justify-content: center;
+  
+}
+.filters li{
+   
+    display: inline;
+    list-style: none;
+}
+
+

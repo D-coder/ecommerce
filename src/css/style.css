@@ -1,0 +1,269 @@
+/* Note there a few "reset" styles given in reset.css. Review those before you begin */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    --pad-and-gap: 1em;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+
+/* Preview each of these suggested resets before beginning your project styling */
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+ul,
+ol,
+dl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li>ul,
+li>ol {
+    padding-left: 2.5em;
+}
+
+input,
+button {
+    margin: 0;
+    font: inherit;
+}
+
+
+fieldset {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: center;
+    justify-content: center;
+}
+
+legend {
+    padding: 0;
+    border: none;
+}
+
+
+/* These will make "User agent stylesheet" values (Chrome) available when needed, using classes */
+
+ul.ul {
+    list-style-type: disc;
+}
+
+ol.ol {
+    list-style-type: decimal;
+}
+
+ul.ul,
+ol.ol {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 2.5em;
+}
+
+fieldset.fieldset {
+    display: block;
+    margin-inline-start: 0.125em;
+    margin-inline-end: 0.125em;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 0.125em;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+
+legend.legend {
+    display: block;
+    padding-inline-start: 0.125em;
+    padding-inline-end: 0.125em;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+
+@media (max-width: 1000px) {
+    nav {
+        padding: 0 40px 0 50px;
+    }
+}
+
+nav {
+    display: flex;
+    height: 80px;
+    width: 100%;
+    background: #1b1b1b;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px 0 100px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    nav {
+        display: flex;
+        height: 80px;
+        width: 100%;
+        background: #1b1b1b;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .menu {
+        flex-direction: column;
+        z-index: 1;
+        background: #1b1b1b;
+        position: absolute;
+        top: 22px;
+        width: 100%;
+        right: 0px;
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+}
+
+nav .logo a {
+    color: #fff;
+    font-size: 35px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.menu {
+    overflow: hidden;
+}
+
+.icon {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .menu li {
+        display: none;
+    }
+    .logo {
+        position: relative;
+        padding-left: 28px;
+    }
+    .icon {
+        float: right;
+        display: block;
+        background-color: white;
+        width: 20px;
+    }
+    .icon i {
+        left: 3px;
+        position: relative;
+    }
+    .responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .menu.responsive {
+        top: 80px;
+    }
+    .menu.responsive li {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 5px;
+}
+
+@media (max-width: 600px) {
+    nav ul li {
+        margin: 0 0;
+    }
+}
+
+nav ul li a {
+    display: flex;
+    color: #f2f2f2 !important;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+    color: #111 !important;
+    background: #fff;
+}
+
+nav .menu-btn i {
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: none;
+}
+
+input[type="checkbox"] {
+    display: inline-block;
+}
+
+.page-header {
+    display: grid;
+    grid-template-columns: auto1fr auto auto;
+}
+
+.search {
+    overflow: hidden;
+    box-shadow: 0px 2px 8px 0px var(--clr-gray-light);
+    background-color: beige;
+    text-align: center;
+    padding-bottom: 0.2rem;
+    border-radius: 1rem;
+    position: relative;
+    margin: 0.5rem;
+    padding: 2px;
+}
+
+.search button {
+    background-color: none;
+    text-decoration: none;
+    border: none;
+    padding : 2px; 
+    display: inline-block;
+}
