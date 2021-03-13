@@ -8,16 +8,22 @@ const Header = () => {
 		} else {
 			x.className = 'menu';
 		}
+		var x = document.getElementById('search-form');
+		if (x.className === 'search') {
+			x.className += ' responsive';
+		} else {
+			x.className = 'search';
+		}
 	};
 	return (
-		<header>
+		<header className='page-header'>
+			<div className='logo'>
+				<a href='index.html'>ADEO</a>
+			</div>
+			<a className='icon' onClick={hamburgerMenu} onclick='myFunction()'>
+				<i class='fas fa-bars'></i>
+			</a>
 			<nav aria-label='Primary' className='navigation'>
-				<div className='logo'>
-					<a href='index.html'>ADEO</a>
-				</div>
-				<a className='icon' onClick={hamburgerMenu} onclick='myFunction()'>
-					<i class='fas fa-bars'></i>
-				</a>
 				<ul className='menu' id='myTopnav'>
 					<li>
 						<a href='#' className='active'>
@@ -49,14 +55,13 @@ const Header = () => {
 					</li>
 				</ul>
 			</nav>
-			<form className='search'>
+			<form id='search-form' className='search'>
 				<input type='search' name='find' id='find' defaultValue='search' />
 
 				<button type='button'>
 					<i className='fas fa-search'></i>
 				</button>
 			</form>
-			<ul className='your-products'></ul>
 		</header>
 	);
 };
