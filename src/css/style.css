@@ -50,7 +50,6 @@ button {
     font: inherit;
 }
 
-
 fieldset {
     display: flex;
     margin: 0;
@@ -110,47 +109,14 @@ legend.legend {
     border-image: initial;
 }
 
-@media (max-width: 1000px) {
-    nav {
-        padding: 0 40px 0 50px;
-    }
-}
-
-nav {
-    display: flex;
-    height: 80px;
-    width: 100%;
+.logo {
+    grid-column: 1;
+    position: relative;
+    padding-left: 28px;
     background: #1b1b1b;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px 0 100px;
-    flex-wrap: wrap;
 }
 
-@media (max-width: 600px) {
-    nav {
-        display: flex;
-        height: 80px;
-        width: 100%;
-        background: #1b1b1b;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .menu {
-        flex-direction: column;
-        z-index: 1;
-        background: #1b1b1b;
-        position: absolute;
-        top: 22px;
-        width: 100%;
-        right: 0px;
-        padding-left: 0px;
-        margin-left: 0px;
-    }
-}
-
-nav .logo a {
+.logo a {
     color: #fff;
     font-size: 35px;
     font-weight: 600;
@@ -161,41 +127,43 @@ nav .logo a {
     overflow: hidden;
 }
 
-.icon {
+nav {
+    grid-column: 3 span;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu {
+    flex-direction: column;
+    z-index: 1;
+    background: #1b1b1b;
+    position: relative;
+}
+
+.menu li {
     display: none;
 }
 
-@media screen and (max-width: 600px) {
-    .menu li {
-        display: none;
-    }
-    .logo {
-        position: relative;
-        padding-left: 28px;
-    }
-    .icon {
-        float: right;
-        display: block;
-        background-color: white;
-        width: 20px;
-    }
-    .icon i {
-        left: 3px;
-        position: relative;
-    }
-    .responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .menu.responsive {
-        top: 80px;
-    }
-    .menu.responsive li {
-        float: none;
-        display: block;
-        text-align: left;
-    }
+.icon {
+    grid-column: 4;
+    position: relative;
+    top: 20px;
+    height: 24px;
+    right: 12px;
+    background-color: white;
+    width: 20px;
+}
+
+.icon i {
+    left: 3px;
+    position: relative;
+}
+
+.menu.responsive li {
+    float: none;
+    display: grid;
+    text-align: left;
 }
 
 nav ul {
@@ -205,12 +173,67 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 5px;
+    margin: 0 0;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 70em) {
     nav ul li {
-        margin: 0 0;
+        margin: 0 5px;
+    }
+}
+
+.page-header {
+    height: auto;
+    display: grid;
+    background: #1b1b1b;
+    grid-template-columns: auto 1fr auto auto;
+}
+
+.search {
+    width: 100%;
+    grid-row: 2;
+    grid-column: span 4;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px 0px var(--clr-gray-light);
+    text-align: center;
+    padding-bottom: 0.2rem;
+    border-radius: 1rem;
+    position: relative;
+    margin: 0.5rem;
+}
+
+.search input {
+    width: 90%;
+}
+
+.search button {
+    background-color: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+@media (min-width: 70em) {
+    .icon {
+        display: none;
+    }
+    nav {
+        grid-column: 3;
+        padding: 0 50px 0 100px;
+        margin-top: 10px;
+    }
+    .menu {
+        overflow: hidden;
+        flex-direction: row;
+        z-index: 1;
+        position: relative;
+        top: 0px;
+        right: 0px;
+        width: auto;
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+    .menu li {
+        display: flex;
     }
 }
 
@@ -240,30 +263,5 @@ nav .menu-btn i {
 }
 
 input[type="checkbox"] {
-    display: inline-block;
-}
-
-.page-header {
-    display: grid;
-    grid-template-columns: auto1fr auto auto;
-}
-
-.search {
-    overflow: hidden;
-    box-shadow: 0px 2px 8px 0px var(--clr-gray-light);
-    background-color: beige;
-    text-align: center;
-    padding-bottom: 0.2rem;
-    border-radius: 1rem;
-    position: relative;
-    margin: 0.5rem;
-    padding: 2px;
-}
-
-.search button {
-    background-color: none;
-    text-decoration: none;
-    border: none;
-    padding : 2px; 
-    display: inline-block;
+    display: none;
 }

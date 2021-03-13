@@ -1,9 +1,56 @@
-.products h1 {
+.products {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.heading {
+    grid-column: span 2;
     text-align: center;
 }
 
 .subheading {
+    grid-row: 3;
     text-align: center;
+}
+
+.results {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column: span 2;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+@media (min-width: 40em) {
+    .products {
+        display: grid;
+        grid-template-columns: 15em auto;
+    }
+}
+
+@media (min-width: 70em) {
+    .products {
+        display: block;
+    }
+    .results {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column: span 2;
+    }
+    .filter-list {
+        justify-content: flex-start;
+    }
+}
+
+@media (min-width: 90em) {
+    .results {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-column: span 2;
+    }
+    .filter-list {
+        justify-content: flex-start;
+    }
 }
 
 .results dd {
@@ -33,48 +80,40 @@ button:focus {
 }
 
 .pagination {
+    grid-column: span 2;
     background-color: #ffffff;
     color: #000000;
     text-align: center;
-    display: inline;
+    justify-content: center;
 }
 
 .pagination a {
     color: #000000;
-    float: center;
-    padding: 8px 16px;
-    text-decoration: none;
-    
-    }
-.pagination a:hover{
-    text-decoration: underline;
 }
 
 .pagination li {
     display: inline;
-    
-}
-
-.filters{
-    font-size: 14px;
-    text-align: center; 
-    margin: 20px;
-    
-}
-.filters fieldset{
-    text-align: center;
-    width: 100%;
-    position:relative;
-    font-size: 11px;
-    padding: 5px;
-    display: flex;
-  justify-content: center;
-  
-}
-.filters li{
-   
-    display: inline;
     list-style: none;
 }
 
+.filters {
+    grid-column: span 2;
+    font-size: 14px;
+    text-align: center;
+    margin: 20px;
+}
 
+.filters fieldset {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    font-size: 11px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.filters li {
+    display: inline;
+    list-style: none;
+}
