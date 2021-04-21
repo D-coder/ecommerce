@@ -1,14 +1,18 @@
 import React from 'React';
 import 'css/product.css';
-const Product = ({ rating, title, range, index }) => {
-	const productImage = require(`img/product${index + 1}.jpeg`);
+
+const Product = ({ rating, title, range, picture }) => {
+	const productImage = require(`img/${picture}.jpeg`);
+	const priceRange = range.split('-');
+	const oldPrice = priceRange[0];
+	const newPrice = priceRange[1];
 	return (
 		<article className='product'>
 			<header>
 				<img src={productImage.default} alt='Product Image' />
 				<h3>{title}</h3>
 				<data defaultValue='40'>
-					<del>${range.old}</del> <ins>${range.new}</ins>
+					<del>${oldPrice}</del> <ins>${newPrice}</ins>
 				</data>
 				<p>Here is a shot of this product..</p>
 				<dl>
