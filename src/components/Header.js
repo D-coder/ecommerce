@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Header = () => {
+const Header = ({ filteredProducts, products }) => {
+	const [searchItem, setSearchItem] = useState('');
+	useEffect(() => {
+		const search = location.search;
+		const params = new URLSearchParams(search);
+		const searchFind = params.get('find');
+		if (products && searchFind && products.length > 0) {
+			filteredProducts(searchFind);
+			setSearchItem(searchFind);
+		}
+	}, [products]);
 	const hamburgerMenu = () => {
 		var x = document.getElementById('myTopnav');
 		if (x.className === 'menu') {
@@ -18,10 +28,10 @@ const Header = () => {
 	return (
 		<header className='page-header'>
 			<div className='logo'>
-				<a href='index.html'>ADEO</a>
+				<a href='/'>ADEO</a>
 			</div>
-			<a className='icon' onClick={hamburgerMenu} onclick='myFunction()'>
-				<i class='fas fa-bars'></i>
+			<a className='icon' onClick={hamburgerMenu}>
+				<i className='fas fa-bars'></i>
 			</a>
 			<nav aria-label='Primary' className='navigation'>
 				<ul className='menu' id='myTopnav'>
@@ -56,7 +66,16 @@ const Header = () => {
 				</ul>
 			</nav>
 			<form id='search-form' className='search'>
-				<input type='search' name='find' id='find' defaultValue='search' />
+				<input
+					value={searchItem}
+					onChange={(e) => {
+						setSearchItem(e.target.value);
+						filteredProducts(e.target.value);
+					}}
+					type='text'
+					name='find'
+					id='find'
+				/>
 
 				<button type='button'>
 					<i className='fas fa-search'></i>
