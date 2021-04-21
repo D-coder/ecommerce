@@ -263,5 +263,5 @@ nav .menu-btn i {
 }
 
 input[type="checkbox"] {
-    display: none;
+    margin-left: 8px;
 }
