@@ -1,16 +1,14 @@
 import React from 'react';
-import 'css/Style.css';
-import Header from 'components/Header';
-import ProductList from 'components/ProductList';
-import Footer from 'components/Footer';
+import AppLayout from './Layout';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 const App = () => {
 	return (
-		<>
-			<Header />
-			<ProductList />
-			<Footer />
-		</>
+		<BrowserRouter>
+			<Switch>
+				<Route path='/' component={AppLayout} />
+			</Switch>
+		</BrowserRouter>
 	);
 };
 
