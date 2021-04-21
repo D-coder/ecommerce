@@ -1,41 +1,104 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Product from 'components/Product';
+import { Link } from 'react-router-dom';
 import 'css/productList.css';
 
-const productData = [
-	{
-		title: "Women's Daily Hoodie",
-		range: { old: '60.00', new: '40.00' },
-		rating: 4.4
-	},
-	{
-		title: 'Hoodie',
-		range: { old: '50.00', new: '39.00' },
-		rating: 4.3
-	},
-	{
-		title: 'Crop-top Hoodie',
-		range: { old: '50.00', new: '40.00' },
-		rating: 4.6
-	},
-	{
-		title: 'Oversize Hoodie',
-		range: { old: '40.00', new: '30.00' },
-		rating: 4.9
-	},
-	{
-		title: "Men's Hoodie",
-		range: { old: '55.00', new: '35.00' },
-		rating: 4.6
-	},
-	{
-		title: 'Long Sweatshirt',
-		range: { old: '50.00', new: '26.00' },
-		rating: 4.1
-	}
-];
+const ProductList = ({ products, location, filterbyRating, filterbySize, filterbyColors, filterbyPrice }) => {
+	const [pagination, setPagination] = useState(0);
+	const [colours, setColours] = useState([]);
+	const [sizes, setSizes] = useState([]);
+	const [state, setstate] = useState(false);
+	const [pages, setPages] = useState(
+		<li>
+			<Link onClick={() => setPagintationOnClick(0)} to='?page=1' aria-label='Current Page, Page 1' aria-current='true'>
+				1
+			</Link>
+		</li>
+	);
+	console.log(products);
+	const setPagintationOnClick = (page) => {
+		setPagination(page);
+	};
 
-const ProductList = () => {
+	useEffect(() => {
+		const search = location.search;
+		const params = new URLSearchParams(search);
+		const page = params.get('page');
+		if (page) {
+			setPagination(page - 1);
+		}
+		const pagess = [];
+		if (products.length > 0) {
+			let pageSize = products.length;
+			let numPages = 1;
+			while (pageSize > 0) {
+				pagess.push(
+					<li>
+						<Link
+							onClick={() => setPagintationOnClick(numPages - 1)}
+							to={`?page=${numPages}`}
+							aria-label='Current Page, Page 1'
+							aria-current='true'>
+							{numPages}
+						</Link>
+					</li>
+				);
+				numPages += 1;
+				pageSize = pageSize - 9;
+			}
+			setPages(pagess);
+		}
+	}, []);
+
+	useEffect(() => {
+		const pagess = [];
+		if (products.length > 0) {
+			let pageSize = products.length;
+			let numPages = 1;
+			while (pageSize > 0) {
+				pagess.push(
+					<li>
+						<a
+							onClick={() => setPagintationOnClick(numPages - 1)}
+							href={`?page=${numPages}`}
+							aria-label='Current Page, Page 1'
+							aria-current='true'>
+							{numPages}
+						</a>
+					</li>
+				);
+				numPages += 1;
+				pageSize = pageSize - 9;
+			}
+			setPages(pagess);
+		}
+	}, [products]);
+
+	const handleColorsChecked = (event) => {
+		const theseColors = colours;
+		const colorFound = theseColors.findIndex((color) => color === event.target.value);
+		if (colorFound > -1) {
+			theseColors.splice(colorFound, 1);
+		} else {
+			theseColors.push(event.target.value);
+		}
+		console.log(theseColors);
+		filterbyColors(theseColors);
+		setSizes(theseColors);
+	};
+
+	const handleSizesChecked = (event) => {
+		const theseSizes = sizes;
+		const sizeFound = theseSizes.findIndex((size) => size === event.target.value);
+		if (sizeFound > -1) {
+			theseSizes.splice(sizeFound, 1);
+		} else {
+			theseSizes.push(event.target.value);
+		}
+		filterbySize(theseSizes);
+		setColours(theseSizes);
+	};
+
 	return (
 		<main className='products'>
 			<header className='heading'>
@@ -52,22 +115,27 @@ const ProductList = () => {
 							<h5 style={{ fontWeight: 'bold' }}>Colour</h5>
 						</span>
 
-						<span style={{ display: 'flex', flex: '1.2' }}>
+						<span style={{ display: 'flex', flex: '1.5' }}>
 							<ul className='filter-list'>
 								<li>
-									<input type='checkbox' name='colour' defaultValue='black' id='black' /> <label htmlFor='black'>Black</label>
+									<input onClick={handleColorsChecked} type='checkbox' name='colour' defaultValue='Black' id='black' />{' '}
+									<label htmlFor='black'>Black</label>
 								</li>
 								<li>
-									<input type='checkbox' name='colour' defaultValue='white' id='white' /> <label htmlFor='white'>White</label>
+									<input onClick={handleColorsChecked} type='checkbox' name='colour' defaultValue='White' id='white' />{' '}
+									<label htmlFor='white'>White</label>
 								</li>
 								<li>
-									<input type='checkbox' name='colour' defaultValue='grey' id='grey' /> <label htmlFor='grey'>Grey</label>
+									<input onClick={handleColorsChecked} type='checkbox' name='colour' defaultValue='Grey' id='grey' />{' '}
+									<label htmlFor='grey'>Grey</label>
 								</li>
 								<li>
-									<input type='checkbox' name='colour' defaultValue='red' id='red' /> <label htmlFor='red'>Red</label>
+									<input onClick={handleColorsChecked} type='checkbox' name='colour' defaultValue='Pink' id='pink' />{' '}
+									<label htmlFor='red'>Pink</label>
 								</li>
 								<li>
-									<input type='checkbox' name='colour' defaultValue='blue' id='blue' /> <label htmlFor='blue'>Blue</label>
+									<input onClick={handleColorsChecked} type='checkbox' name='colour' defaultValue='Blue' id='blue' />{' '}
+									<label htmlFor='blue'>Blue</label>
 								</li>
 							</ul>
 						</span>
@@ -76,22 +144,21 @@ const ProductList = () => {
 						<span style={{ display: 'flex', justifyContent: 'flex-start', flex: '1' }}>
 							<h6 style={{ fontWeight: 'bold' }}>Sizes</h6>
 						</span>
-						<span style={{ display: 'flex', flex: '1.1' }}>
+						<span style={{ display: 'flex', flex: '1.3' }}>
 							<ol className='filter-list'>
 								<li>
-									<input type='checkbox' name='size' defaultValue='xs' id='xs' /> <label htmlFor='xs'>XS</label>
+									<input onClick={handleSizesChecked} type='checkbox' name='size' defaultValue='XS' id='xs' />
+									<label htmlFor='xs'>XS</label>
 								</li>
 								<li>
-									<input type='checkbox' name='size' defaultValue='sm' id='sm' /> <label htmlFor='sm'>S</label>
+									<input onClick={handleSizesChecked} type='checkbox' name='size' defaultValue='M' id='md' /> <label htmlFor='md'>M</label>
 								</li>
 								<li>
-									<input type='checkbox' name='size' defaultValue='md' id='md' /> <label htmlFor='md'>M</label>
+									<input onClick={handleSizesChecked} type='checkbox' name='size' defaultValue='L' id='lg' /> <label htmlFor='lg'>L</label>
 								</li>
 								<li>
-									<input type='checkbox' name='size' defaultValue='lg' id='lg' /> <label htmlFor='lg'>L</label>
-								</li>
-								<li>
-									<input type='checkbox' name='size' defaultValue='xl' id='xl' /> <label htmlFor='xl'>XL</label>
+									<input onClick={handleSizesChecked} type='checkbox' name='size' defaultValue='XL' id='xl' />{' '}
+									<label htmlFor='xl'>XL</label>
 								</li>
 							</ol>
 						</span>
@@ -103,7 +170,7 @@ const ProductList = () => {
 						<span style={{ display: 'flex', flex: '2.45' }}>
 							<ol className='filter-list'>
 								<li>
-									<input type='radio' name='rating' defaultValue='4' id='aboveFour' />
+									<input onChange={() => filterbyRating(4)} type='radio' name='rating' defaultValue='4' id='aboveFour' />
 									<label htmlFor='aboveFour'>
 										<span className='material-icons'>star</span>
 										<span className='material-icons'>star</span>
@@ -113,7 +180,7 @@ const ProductList = () => {
 									</label>
 								</li>
 								<li>
-									<input type='radio' name='rating' defaultValue='3' id='aboveThree' />
+									<input onChange={() => filterbyRating(3)} type='radio' name='rating' defaultValue='3' id='aboveThree' />
 									<label htmlFor='aboveThree'>
 										<span className='material-icons'>star</span>
 										<span className='material-icons'>star</span>
@@ -123,7 +190,7 @@ const ProductList = () => {
 									</label>
 								</li>
 								<li>
-									<input type='radio' name='rating' defaultValue='2' id='aboveTwo' />
+									<input onChange={() => filterbyRating(2)} type='radio' name='rating' defaultValue='2' id='aboveTwo' />
 									<label htmlFor='aboveTwo'>
 										<span className='material-icons'>star</span>
 										<span className='material-icons'>star</span>
@@ -133,7 +200,7 @@ const ProductList = () => {
 									</label>
 								</li>
 								<li>
-									<input type='radio' name='rating' defaultValue='1' id='aboveOne' />
+									<input onChange={() => filterbyRating(1)} type='radio' name='rating' defaultValue='1' id='aboveOne' />
 									<label htmlFor='aboveOne'>
 										<span className='material-icons'>star</span>
 										<span className='material-icons'>star_border</span>
@@ -148,52 +215,27 @@ const ProductList = () => {
 				</div>
 				<fieldset>
 					<label htmlFor='sort'>Show</label>
-					<select name='sort' id='sort'>
+					<select onChange={filterbyPrice} name='sort' id='sort'>
 						<option defaultValue='price-high'>Price, highest to lowest</option>
 						<option defaultValue='price-low'>Price, lowest to highest</option>
-						<option defaultValue='newest'>Newest releases</option>
 					</select>
 				</fieldset>
 			</form>
 			<h2 className='subheading'>Results</h2>
 			<section className='results'>
-				{productData.map((product, index) => (
+				{products.slice(pagination * 9, (pagination + 1) * 9).map((product, index) => (
 					<div key={index}>
-						<Product index={index} title={product.title} range={product.range} rating={product.rating} />
+						<Product picture={product.picture} title={product.title} range={product.range} rating={product.rating} />
 					</div>
 				))}
 			</section>
 
 			<nav aria-label='Pagination' className='pagination'>
-				<p>1-6 of 23 products found</p>
+				<p>
+					{pagination + 1} - {Math.ceil(products.length / 9)} of {products.length} products found
+				</p>
 				<br />
-				<ol className='pages'>
-					<li>
-						<a href='#' aria-label='Current Page, Page 1' aria-current='true'>
-							1
-						</a>
-					</li>
-					<li>
-						<a href='#' aria-label='Page 2'>
-							2
-						</a>
-					</li>
-					<li>
-						<a href='#' aria-label='Page 3'>
-							3
-						</a>
-					</li>
-					<li>
-						<a href='#' aria-label='Page 4'>
-							4
-						</a>
-					</li>
-					<li>
-						<a href='#' aria-label='Page 5'>
-							5
-						</a>
-					</li>
-				</ol>
+				<ol className='pages'>{pages}</ol>
 			</nav>
 		</main>
 	);
