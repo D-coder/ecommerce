@@ -1,6 +1,11 @@
 # Adeo Webstore
 A Webstore for Minimal Clothes
 
+
+## Lighthouse
+
+![Lighthouse score](lighthouse.png)
+
 ## Getting Started
 
 1. Install the project dependencies
